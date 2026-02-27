@@ -762,7 +762,7 @@ export default function Support() {
                       <TableHead>Category</TableHead>
                       <TableHead>Created</TableHead>
                       <TableHead>Last Updated</TableHead>
-                      <TableHead>Action</TableHead>
+                      <TableHead>Chat Messages</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -820,34 +820,27 @@ export default function Support() {
                           {formatDate(ticket.updatedAt)}
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-2">
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Badge
-                                    variant="secondary"
-                                    className="bg-blue-100 text-blue-800 border border-blue-200"
-                                  >
-                                    {ticket.chatCount || 0}
-                                  </Badge>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  {ticket.chatCount || 0} message
-                                  {ticket.chatCount !== 1 ? "s" : ""}
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() =>
-                                navigate(`/chat-support/${ticket.id}`)
-                              }
-                              className="border-valasys-orange text-valasys-orange hover:bg-valasys-orange hover:text-white"
-                            >
-                              <MessageCircle className="w-4 h-4" />
-                            </Button>
-                          </div>
+                          <Button
+                            onClick={() =>
+                              navigate(`/chat-support/${ticket.id}`)
+                            }
+                            className="flex items-center gap-3 px-4 py-2 h-auto rounded-lg bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 text-blue-900 border border-blue-200 transition-all duration-200 w-full justify-center"
+                          >
+                            <div className="flex flex-col items-center gap-0.5">
+                              <MessageCircle className="w-4 h-4 text-blue-600" />
+                              <span className="text-xs font-medium">
+                                Chat
+                              </span>
+                            </div>
+                            <div className="flex flex-col items-start">
+                              <span className="text-sm font-bold text-blue-900">
+                                {ticket.chatCount || 0}
+                              </span>
+                              <span className="text-xs text-blue-700">
+                                message{ticket.chatCount !== 1 ? "s" : ""}
+                              </span>
+                            </div>
+                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}

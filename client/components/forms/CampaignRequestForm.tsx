@@ -1212,14 +1212,14 @@ export default function CampaignRequestForm() {
               <ToggleGroupItem
                 value="live"
                 aria-label="Live mode"
-                className="text-sm font-medium px-4 py-2 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white data-[state=off]:text-gray-700"
+                className="text-sm font-medium px-4 py-2 rounded-full data-[state=on]:bg-orange-500 data-[state=on]:text-white data-[state=off]:text-gray-700"
               >
                 Live
               </ToggleGroupItem>
               <ToggleGroupItem
                 value="tal"
                 aria-label="TAL File mode"
-                className="text-sm font-medium px-4 py-2 rounded-full data-[state=on]:bg-purple-500 data-[state=on]:text-white data-[state=off]:text-gray-700"
+                className="text-sm font-medium px-4 py-2 rounded-full data-[state=on]:bg-orange-500 data-[state=on]:text-white data-[state=off]:text-gray-700"
               >
                 TAL File
               </ToggleGroupItem>

@@ -91,6 +91,11 @@ export interface BuilderComponent {
   buttonFontSizeUnit?: "px" | "%" | "rem";
   buttonWidth?: number;
   buttonWidthUnit?: "%" | "px";
+  // Element-specific alignment for hero section
+  badgeTextAlign?: "left" | "center" | "right" | "justify";
+  headingTextAlign?: "left" | "center" | "right" | "justify";
+  paragraphTextAlign?: "left" | "center" | "right" | "justify";
+  buttonTextAlign?: "left" | "center" | "right" | "justify";
   // Track which hero element is currently selected for editing
   selectedHeroElement?: "badge" | "heading" | "paragraph" | "buttons" | null;
 }

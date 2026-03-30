@@ -63,6 +63,11 @@ interface StyleState {
   buttonWidth: string;
   buttonFontSize: string;
   buttonFontSizeUnit: "%" | "px" | "rem";
+  // Element-specific alignment for hero section
+  badgeTextAlign: "left" | "center" | "right" | "justify";
+  headingTextAlign: "left" | "center" | "right" | "justify";
+  paragraphTextAlign: "left" | "center" | "right" | "justify";
+  buttonTextAlign: "left" | "center" | "right" | "justify";
   selectedHeroElement?: string;
 }
 
@@ -146,6 +151,11 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
     buttonWidth: "",
     buttonFontSize: "",
     buttonFontSizeUnit: "rem",
+    // Element-specific alignment for hero section
+    badgeTextAlign: "left",
+    headingTextAlign: "left",
+    paragraphTextAlign: "left",
+    buttonTextAlign: "left",
     selectedHeroElement: "",
   });
 
@@ -288,6 +298,11 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
         buttonWidth: component.buttonWidth ? clampPercentWidth(String(component.buttonWidth)) : "",
         buttonFontSize: component.buttonFontSize ? String(component.buttonFontSize) : "",
         buttonFontSizeUnit: component.buttonFontSizeUnit || "rem",
+        // Element-specific alignment for hero section
+        badgeTextAlign: component.badgeTextAlign || "left",
+        headingTextAlign: component.headingTextAlign || "left",
+        paragraphTextAlign: component.paragraphTextAlign || "left",
+        buttonTextAlign: component.buttonTextAlign || "left",
         selectedHeroElement: component.selectedHeroElement || "",
       });
 
@@ -308,21 +323,38 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
     component?.badgeWidth,
     component?.badgeFontSize,
     component?.badgeFontSizeUnit,
+    component?.badgeTextAlign,
     component?.headingWidth,
     component?.headingFontSize,
     component?.headingFontSizeUnit,
+    component?.headingTextAlign,
     component?.paragraphWidth,
     component?.paragraphFontSize,
     component?.paragraphFontSizeUnit,
+    component?.paragraphTextAlign,
     component?.buttonWidth,
     component?.buttonFontSize,
     component?.buttonFontSizeUnit,
+    component?.buttonTextAlign,
     component?.selectedHeroElement,
     clampPercentWidth,
   ]);
 
   const handleStyleChange = React.useCallback(
     (key: keyof StyleState, value: string | string[] | "all" | "desktop" | "tablet" | "mobile") => {
+      // Handle text alignment for hero elements
+      if (key === "textAlign" && component?.selectedHeroElement) {
+        const alignmentKey = `${component.selectedHeroElement}TextAlign` as keyof StyleState;
+        setStyles((prev) => ({
+          ...prev,
+          [alignmentKey]: value,
+        }));
+        const updates: any = {};
+        updates[alignmentKey] = value;
+        onUpdate(updates);
+        return;
+      }
+
       // Update local state immediately for responsive UI
       const nextValue =
         key === "badgeWidth" || key === "headingWidth" || key === "paragraphWidth" || key === "buttonWidth"
@@ -860,7 +892,14 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
             <div className="px-4 py-4 space-y-4 bg-gray-50">
               {/* Text Alignment */}
               <div>
-                <label className="text-xs font-semibold text-gray-700 block mb-2">Text Alignment</label>
+                <label className="text-xs font-semibold text-gray-700 block mb-2">
+                  Text Alignment
+                  {component?.selectedHeroElement && (
+                    <span className="text-gray-500 text-xs ml-2">
+                      ({component.selectedHeroElement})
+                    </span>
+                  )}
+                </label>
                 <div className="flex gap-2">
                   {[
                     { value: "left" as const, icon: AlignLeft },
@@ -869,13 +908,16 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
                     { value: "justify" as const, icon: AlignJustify },
                   ].map((opt) => {
                     const IconComponent = opt.icon;
+                    const currentAlignment = component?.selectedHeroElement
+                      ? styles[`${component.selectedHeroElement}TextAlign` as keyof StyleState]
+                      : styles.textAlign;
                     return (
                       <button
                         key={opt.value}
                         onClick={() => handleStyleChange("textAlign", opt.value)}
                         className={cn(
                           "flex-1 py-2 px-2 rounded flex items-center justify-center transition-colors border",
-                          styles.textAlign === opt.value
+                          currentAlignment === opt.value
                             ? "bg-blue-100 border-blue-400 text-blue-600"
                             : "bg-white border-gray-300 text-gray-600 hover:bg-gray-50"
                         )}

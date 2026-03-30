@@ -97,14 +97,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     if (component.backgroundColor) {
       styles.backgroundColor = component.backgroundColor;
     }
-    // Apply text alignment
-    if (component.textAlign) {
-      styles.textAlign = component.textAlign;
-    }
-    // Apply content alignment (justify-content)
-    if (component.justifyContent) {
-      styles.justifyContent = component.justifyContent;
-    }
     return styles;
   };
 
@@ -317,6 +309,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         const badgeContent = isSelected ? getDisplayContent("badge") : (element.content || getDefaultContent("badge"));
         const badgeFontSize = component.badgeFontSize ? `${component.badgeFontSize}${component.badgeFontSizeUnit || "rem"}` : undefined;
         const badgeWidth = component.badgeWidth ? `${component.badgeWidth}${component.badgeWidthUnit || "%"}` : undefined;
+        const badgeTextAlign = component.badgeTextAlign || "left";
         return (
           <div
             key={element.id}
@@ -328,7 +321,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onClick={() => handleElementClick(element.id)}
-            style={{ maxWidth: badgeWidth || "100%" }}
+            style={{ maxWidth: badgeWidth || "100%", textAlign: badgeTextAlign }}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-valasys-orange/10 text-valasys-orange font-bold uppercase tracking-wider" style={{ fontSize: badgeFontSize || "0.75rem" }}>
               {isSelected ? (
@@ -365,6 +358,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         const headingContent = isSelected ? getDisplayContent("heading") : (element.content || getDefaultContent("heading"));
         const headingWidth = component.headingWidth ? `${component.headingWidth}${component.headingWidthUnit || "%"}` : undefined;
         const headingFontSize = component.headingFontSize ? `${component.headingFontSize}${component.headingFontSizeUnit || "rem"}` : undefined;
+        const headingTextAlign = component.headingTextAlign || "left";
         return (
           <div
             key={element.id}
@@ -372,6 +366,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onClick={() => handleElementClick(element.id)}
+            style={{ textAlign: headingTextAlign }}
           >
             {isSelected ? (
               <Textarea
@@ -389,6 +384,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 style={{
                   maxWidth: headingWidth || "100%",
                   fontSize: headingFontSize || "3.75rem",
+                  textAlign: headingTextAlign,
                 }}
                 rows={1}
               />
@@ -402,6 +398,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   whiteSpace: "normal",
                   maxWidth: headingWidth || "100%",
                   fontSize: headingFontSize || "3.75rem",
+                  textAlign: headingTextAlign,
                 }}
               >
                 {headingContent}
@@ -415,6 +412,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         const paragraphContent = isSelected ? getDisplayContent("paragraph") : (element.content || getDefaultContent("paragraph"));
         const paragraphWidth = component.paragraphWidth ? `${component.paragraphWidth}${component.paragraphWidthUnit || "%"}` : undefined;
         const paragraphFontSize = component.paragraphFontSize ? `${component.paragraphFontSize}${component.paragraphFontSizeUnit || "rem"}` : undefined;
+        const paragraphTextAlign = component.paragraphTextAlign || "left";
         return (
           <div
             key={element.id}
@@ -422,6 +420,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onClick={() => handleElementClick(element.id)}
+            style={{ textAlign: paragraphTextAlign }}
           >
             {isSelected ? (
               <Textarea
@@ -440,6 +439,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   width: "100%",
                   maxWidth: paragraphWidth || "100%",
                   fontSize: paragraphFontSize || "1.125rem",
+                  textAlign: paragraphTextAlign,
                 }}
                 rows={1}
               />
@@ -454,6 +454,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   width: "100%",
                   maxWidth: "100%",
                   fontSize: paragraphFontSize || "1.125rem",
+                  textAlign: paragraphTextAlign,
                 }}
               >
                 {paragraphContent}
@@ -466,6 +467,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       case "buttons":
         const buttonsWidth = component.buttonWidth ? `${component.buttonWidth}${component.buttonWidthUnit || "%"}` : undefined;
         const buttonFontSize = component.buttonFontSize ? `${component.buttonFontSize}${component.buttonFontSizeUnit || "rem"}` : undefined;
+        const buttonTextAlign = component.buttonTextAlign || "left";
         return (
           <div
             key={element.id}
@@ -473,8 +475,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onClick={() => handleElementClick(element.id)}
+            style={{ textAlign: buttonTextAlign }}
           >
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-4" style={{ maxWidth: buttonsWidth || "100%", fontSize: buttonFontSize || "1.125rem" }}>
+            <div className="flex flex-wrap items-center justify-center gap-4 mt-4" style={{ maxWidth: buttonsWidth || "100%", fontSize: buttonFontSize || "1.125rem", textAlign: buttonTextAlign }}>
               {isSelected ? (
                 <Input
                   value={component.heroPrimaryButtonText}

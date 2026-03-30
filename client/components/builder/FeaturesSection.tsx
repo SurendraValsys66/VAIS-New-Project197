@@ -56,9 +56,6 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({
   };
 
   const handleDeleteFeature = (featureId: string) => {
-    // Don't allow deleting if it's the only feature
-    if (features.length === 1) return;
-
     const updatedFeatures = features.filter(f => f.id !== featureId);
     onUpdate({
       ...block,

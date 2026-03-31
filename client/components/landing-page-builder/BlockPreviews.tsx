@@ -456,15 +456,12 @@ export const PricingBlockPreview: React.FC<BlockPreviewProps> = ({
               ? "2px dashed #FF6A00"
               : "2px solid #e5e7eb",
           }}
-          onMouseEnter={(e) => {
+          onMouseEnter={() => setHoveredElement("heading")}
+          onMouseLeave={() => setHoveredElement(null)}
+          onClick={(e) => {
             e.stopPropagation();
-            setHoveredElement("heading");
+            handleElementClick(e, "heading");
           }}
-          onMouseLeave={(e) => {
-            e.stopPropagation();
-            setHoveredElement(null);
-          }}
-          onClick={(e) => handleElementClick(e, "heading")}
         >
           <h2 className="text-3xl font-bold text-center" style={{ color: props.textColor || "#1f2937" }}>
             {props.heading}
@@ -502,15 +499,12 @@ export const PricingBlockPreview: React.FC<BlockPreviewProps> = ({
               ? "2px dashed #FF6A00"
               : "2px solid #e5e7eb",
           }}
-          onMouseEnter={(e) => {
+          onMouseEnter={() => setHoveredElement("subheading")}
+          onMouseLeave={() => setHoveredElement(null)}
+          onClick={(e) => {
             e.stopPropagation();
-            setHoveredElement("subheading");
+            handleElementClick(e, "subheading");
           }}
-          onMouseLeave={(e) => {
-            e.stopPropagation();
-            setHoveredElement(null);
-          }}
-          onClick={(e) => handleElementClick(e, "subheading")}
         >
           <p className="text-center" style={{ color: props.textColor || "#4b5563" }}>
             {props.subheading}

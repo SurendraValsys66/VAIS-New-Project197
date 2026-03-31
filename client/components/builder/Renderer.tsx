@@ -729,7 +729,7 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
         <div className="p-12 bg-white rounded-3xl border border-gray-100" style={getComponentStyles()}>
           <div className="text-center mb-12">
             <div
-              className="mb-4 rounded-2xl px-4 py-2 transition-all"
+              className="mb-4 inline-block w-fit rounded-2xl px-4 py-2 transition-all mx-auto"
               onMouseEnter={() => setHoveredPricingText("heading")}
               onMouseLeave={() => setHoveredPricingText((currentText) => (currentText === "heading" ? null : currentText))}
               onClick={(e) => {
@@ -738,6 +738,7 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
                 onSelect?.(component.id);
               }}
               style={{
+                display: "inline-block",
                 border: selectedPricingText === "heading"
                   ? "2px solid #FF6A00"
                   : hoveredPricingText === "heading"
@@ -750,7 +751,7 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
               </h2>
             </div>
             <div
-              className="rounded-2xl px-4 py-2 transition-all"
+              className="mx-auto inline-block w-fit rounded-2xl px-4 py-2 transition-all"
               onMouseEnter={() => setHoveredPricingText("subheading")}
               onMouseLeave={() => setHoveredPricingText((currentText) => (currentText === "subheading" ? null : currentText))}
               onClick={(e) => {
@@ -759,6 +760,7 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
                 onSelect?.(component.id);
               }}
               style={{
+                display: "inline-block",
                 border: selectedPricingText === "subheading"
                   ? "2px solid #FF6A00"
                   : hoveredPricingText === "subheading"

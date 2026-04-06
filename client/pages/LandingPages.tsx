@@ -146,7 +146,7 @@ export default function LandingPages() {
               {pages.map((page) => (
                 <div
                   key={page.id}
-                  className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border-b-4 border-b-transparent hover:border-b-valasys-orange"
+                  className="group rounded-2xl border-2 border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border-b-4 border-b-transparent hover:border-b-valasys-orange"
                 >
                   <div className="relative h-64 overflow-hidden flex items-center justify-center bg-gray-50">
                     {/* Auto-scrolling template image */}
